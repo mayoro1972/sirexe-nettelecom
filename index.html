@@ -370,13 +370,13 @@ const CONFIG = {
   videos: [
     { tag: "Présentation", titre: "Nettelecom (TransferAI) en 90 secondes",
       texte: "Pourquoi passer à l'IA maintenant, nos 6 processus, et ce que nous faisons : former, automatiser, connecter.",
-      duree: "1:07", url: "videos/1_nettelecom_transferai_en_90s.mp4" },
+      duree: "1:06", url: "videos/1_nettelecom_transferai_en_90s.mp4" },
     { tag: "Automatisation", titre: "Automatiser ce qui se répète",
       texte: "Les 4 niveaux d'usage de l'IA, un exemple réel et ce que l'IA change dans chaque processus.",
-      duree: "1:25", url: "videos/2_automatiser_vos_processus.mp4" },
+      duree: "1:23", url: "videos/2_automatiser_vos_processus.mp4" },
     { tag: "Formation IA métiers", titre: "Former vos équipes, métier par métier",
       texte: "Nos parcours de formation et la démarche engagée avec ELTON OIL Côte d'Ivoire.",
-      duree: "1:09", url: "videos/3_formation_ia_metiers_elton.mp4" }
+      duree: "1:06", url: "videos/3_formation_ia_metiers_elton.mp4" }
   ],
   // Agents commerciaux : code utilisé dans le QR (?c=CODE) → nom affiché en mode agent
   commerciaux: {
@@ -426,6 +426,9 @@ function renderVideos(){
         ? `<video src="${e.src}" poster="${e.src.replace(/\.mp4$/,'.jpg')}" controls autoplay playsinline></video>`
         : `<iframe src="${e.src}" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>`;
       player.onclick = null;
+      // Démarrer la lecture dans le geste (tap) : sinon iPhone/Android bloquent l'autoplay avec son.
+      const vid = player.querySelector("video");
+      if(vid){ const p = vid.play(); if(p) p.catch(()=>{ vid.muted = true; vid.play().catch(()=>{}); }); }
     };
     player.onclick = play;
     player.onkeydown = e=>{ if(e.key==="Enter"||e.key===" "){e.preventDefault();play();} };

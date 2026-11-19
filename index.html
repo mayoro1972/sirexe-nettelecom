@@ -56,7 +56,7 @@
   .play{width:62px;height:62px;border-radius:50%;background:var(--accent);display:grid;place-items:center;box-shadow:0 6px 18px rgba(0,0,0,.35)}
   .play::before{content:"";border-left:20px solid #fff;border-top:12px solid transparent;border-bottom:12px solid transparent;margin-left:5px}
   .player .soon{position:absolute;bottom:10px;left:0;right:0;text-align:center;font-size:12px}
-  .player .dur{position:absolute;top:10px;right:10px;background:rgba(0,0,0,.6);color:#fff;font-size:12px;padding:2px 8px;border-radius:6px}
+  .player .dur{position:absolute;top:10px;left:10px;background:rgba(0,0,0,.6);color:#fff;font-size:12px;padding:2px 8px;border-radius:6px}
   .vbody{padding:12px 16px 16px}
   .vbody .tag{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--teal)}
   .vbody h3{margin:2px 0 4px;font-size:16px}
@@ -169,8 +169,8 @@
   </section>
 
   <section id="videos">
-    <h2>3 vidéos courtes</h2>
-    <p class="sub">Moins de 4 minutes au total. Regardez maintenant, ou laissez votre email pour les recevoir.</p>
+    <h2>3 épisodes d'une minute</h2>
+    <p class="sub">Le constat, la démonstration, la preuve : environ 3 minutes au total. Regardez maintenant, ou laissez votre email pour les recevoir.</p>
     <div class="videos" id="videoList"></div>
   </section>
 
@@ -368,15 +368,15 @@ const CONFIG = {
   emailContact: "infos@nettelecom.ci",
   // Vidéos : lien YouTube/Vimeo (embed) ou fichier .mp4. Vide = « bientôt disponible ».
   videos: [
-    { tag: "Présentation", titre: "Nettelecom (TransferAI) en 90 secondes",
-      texte: "Pourquoi passer à l'IA maintenant, nos 6 processus, et ce que nous faisons : former, automatiser, connecter.",
-      duree: "1:06", url: "videos/1_nettelecom_transferai_en_90s.mp4" },
-    { tag: "Automatisation", titre: "Automatiser ce qui se répète",
-      texte: "Les 4 niveaux d'usage de l'IA, un exemple réel et ce que l'IA change dans chaque processus.",
-      duree: "1:23", url: "videos/2_automatiser_vos_processus.mp4" },
-    { tag: "Formation IA métiers", titre: "Former vos équipes, métier par métier",
-      texte: "Nos parcours de formation et la démarche engagée avec ELTON OIL Côte d'Ivoire.",
-      duree: "1:06", url: "videos/3_formation_ia_metiers_elton.mp4" }
+    { tag: "Le constat", titre: "Combien d'heures vos équipes perdent-elles chaque semaine ?",
+      texte: "Pourquoi agir maintenant, les 4 niveaux d'usage de l'IA, et notre réponse : former, automatiser, connecter. Diagnostic offert.",
+      duree: "1:02", url: "videos/1_nettelecom_transferai_en_90s.mp4" },
+    { tag: "La démonstration", titre: "Ce que l'IA fait chez vous, processus par processus",
+      texte: "L'exemple que vous venez de vivre au SIREXE, puis ce que l'IA change en finance, opérations, ventes, achats et RH.",
+      duree: "1:01", url: "videos/2_automatiser_vos_processus.mp4" },
+    { tag: "La preuve", titre: "Elton Oil : former d'abord, automatiser ensuite",
+      texte: "Ce que nous avons engagé avec ELTON OIL Côte d'Ivoire, nos parcours de formation et des résultats mesurés à 30, 60 et 90 jours.",
+      duree: "1:07", url: "videos/3_formation_ia_metiers_elton.mp4" }
   ],
   // Agents commerciaux : code utilisé dans le QR (?c=CODE) → nom affiché en mode agent
   commerciaux: {
@@ -411,7 +411,7 @@ function renderVideos(){
     const card = document.createElement("article");
     card.className = "video";
     card.innerHTML = `
-      <div class="player" role="button" tabindex="0" aria-label="Lire : ${v.titre}">
+      <div class="player" role="button" tabindex="0" aria-label="Lire : ${v.titre}"${/\.mp4$/.test(v.url||"") ? ` style="background:#0E1E33 url('${v.url.replace(/\.mp4$/,'.jpg')}') center/cover no-repeat"` : ""}>
         <div class="play"></div>
         <span class="dur">${v.duree}</span>
         ${v.url ? "" : '<span class="soon">Vidéo bientôt disponible — laissez votre email pour la recevoir</span>'}
